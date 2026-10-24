@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spencer Smith's Portfolio Page - WDD 130</title>
+    <link href="styles/styles.css" rel="stylesheet">
+</head>
+<body>
+<!-- HTML is for structure -->
+    <div id="wrapper">
+        <header>
+            <img width="120" src="images/sheep_logo.png" alt="Spencer Smith Sheep">
+
+            <h1>Spencer Smith's Portfolio Page - WDD 130</h1>
+        </header>
+
+        <nav>
+            <ul>
+                <li><a href="#">Home</a></li>
+                <li><a href="wwr/wwrindex.html">WWR</a></li>
+                <li><a href="ice/iceindex.html">ICE</a></li>
+                <li><a href="#">Final Project</a></li>
+            </ul>
+        </nav>
+        <main>
+            <section class="project">
+                <img src="images/home1.png" alt="Home Page">
+                <h2>Home Page</h2>
+                    <p> 
+                        This section will contain the information that is pertaining to the Home Page
+                    </p>
+            </section>
+            
+            
+            <section class="project">
+                <a href="wwr/wwrindex.html">
+                    <img src="images/wwr1.png" alt="WWR">
+                </a>
+                <h2>WWR</h2>
+                    <p> 
+                        This section will contain the information that is pertaining to the WWR Project
+                    </p>
+            </section>
+            
+            <section class="project">
+                <a href="ice/iceindex.html">
+                    <img src="images/ice1.png" alt="ICE Project">
+                </a>
+                    <h2>ICE</h2>
+                    <p>
+                        Explore my in-class exercises, including Apostle Spotlight,
+                        Prophet Cards, and an interactive devotional table.
+                    </p>
+            </section>
+            
+            <section class="project">
+                <a href="">
+                    <img src="images/final1.png" alt="Final Project">
+                </a>
+                    <h2>Final Project</h2>
+                    <p> 
+                        Coming Soon
+                    </p>
+            </section>
+        </main>
+
+        <footer>
+            <div id="contact">
+                <form action="" method:"get">
+
+
+                </form>
+
+            </div>
+            <section class="contact-section">
+                <h2> Contact Us</h2>
+
+                <form class="contact-form" method="post">
+                    <label for="full-name">Full name</label>
+                    <input
+                        type="text"
+                        id="full-name"
+                        name="full_name"
+                        autocomplete="name"
+                        required
+                    >
+
+                    <label for="phone">Phone number</label>
+                    <input
+                        type="tel"
+                        id="phone"
+                        name="phone"
+                        autocomplete="tel"
+                        required
+                    >
+
+                    <label for="email">Email address</label>
+                    <input
+                        type="email"
+                        id="email"
+                        name="email"
+                        autocomplete="email"
+                        required
+                    >
+
+                    <button type="submit">Send My Information</button>
+                </form>
+            </section>
+        &copy; 2026 Spencer Smith</footer>
+    </div>
+</body>
+
+</html>

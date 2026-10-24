@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>My Favorite Devotionals</title>
+  <link rel="stylesheet" href="styles/styles.css" />
+</head>
+<body>
+    <nav class="project-links" aria-label="Project navigation">
+        <a class="home-link" href="../iceindex.html">Back to ICE Projects</a>
+        <a class="home-link" href="../../index.html">Home Page</a>
+    </nav>
+  <div class="container">
+    <header class="header">
+      <div class="header-image">
+        <h1>My Favorite<br>Devotionals</h1>
+      </div>
+    </header>
+    <main>
+      <div class="content-box">
+        <section class="spotlight">
+          <p class="spotlight-label">Devotional Spotlight</p>
+          <h2>Become Legendary</h2>
+          <p class="speaker">Trent Shippen · BYU-Idaho · 2026</p>
+
+          <h3>Why I chose it</h3>
+          <p>Write what you learned and why this devotional matters to you.</p>
+      </section>
+          <table>
+            <thead>
+              <tr>
+                <th>Speaker</th>
+                <th>Title</th>
+                <th>Location</th>
+                <th>Year</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Trent Shippen</td>
+                <td>Become Legendary</td>
+                <td>BYU-Idaho</td>
+                <td>2026</td>
+              </tr>
+            </tbody>
+          </table>
+          <form id="devotional-form">
+            <h2>Add a Devotional</h2>
+
+            <label for="speaker">Speaker</label>
+            <input type="text" id="speaker" name = "speaker" required>
+
+            <label for="title">Devotional Title</label>
+            <input type="text" id="title" name="title"required>
+
+            <label for="location">Location</label>
+            <input type="text" id="location" name="location"required>
+
+            <label for="year">Year</label>
+            <input type="number" id="year" name="year" min="1900" max="2026" required>
+            <button type = "submit">Add Devotional</button>
+          </form>
+      </div>
+    </main>
+  </div>
+  <script>
+  const form = document.querySelector("#devotional-form");
+  const tableBody = document.querySelector("table tbody");
+  const fieldIds = ["speaker", "title", "location", "year"];
+
+  // Load previously saved devotionals.
+  const savedDevotionals = JSON.parse(
+    localStorage.getItem("favoriteDevotionals")
+  ) || [];
+
+  // Display one devotional in the table.
+  function addRow(devotional) {
+    const row = tableBody.insertRow();
+
+    for (const id of fieldIds) {
+      const cell = row.insertCell();
+      cell.textContent = devotional[id];
+    }
+  }
+
+  // Display saved additions when the page opens.
+  for (const devotional of savedDevotionals) {
+    addRow(devotional);
+  }
+
+  form.addEventListener("submit", function(event) {
+    event.preventDefault();
+
+    const devotional = {};
+
+    for (const id of fieldIds) {
+      devotional[id] = document.getElementById(id).value.trim();
+    }
+
+    savedDevotionals.push(devotional);
+
+    localStorage.setItem(
+      "favoriteDevotionals",
+      JSON.stringify(savedDevotionals)
+    );
+
+    addRow(devotional);
+    form.reset();
+  });
+</script>
+</body>
+</html>

@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dallin H. Oaks</title>
+    <style>
+        body {
+            background: #fff1df;
+            margin: 0;
+            padding: 24px 20px 48px;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+        #first {
+            background: #08677d;
+            border: 1px solid #075367;
+            border-top: 4px solid #d7b66a;
+            border-radius: 22px;
+            width: 100%;
+            box-sizing: border-box;
+            padding: 24px 24px 22px;
+            margin: 0;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 0 10px 24px rgba(17, 62, 72, 0.16);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        #first:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 14px 30px rgba(17, 62, 72, 0.22);
+        }
+        h1 {
+            color: #fffaf1;
+            font-family: Georgia, "Times New Roman", serif;
+            font-size: 32px;
+            font-weight: normal;
+            line-height: 1.15;
+            min-height: 2.3em;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 0 6px;
+        }
+        p {
+            color: #ffe0a0;
+            font-family: Georgia, "Times New Roman", serif;
+            font-size: 18px;
+            font-style: italic;
+            line-height: 1.5;
+            text-align: left;
+            min-height: 4.5em;
+            margin: auto 0 0;
+            padding-top: 16px;
+            border-top: 1px solid rgba(255, 224, 160, 0.4);
+        }
+        h2 {
+            color: #c3e7ed;
+            font-size: 14px;
+            font-weight: normal;
+            line-height: 1.45;
+            min-height: 4.35em;
+            margin: 0 0 18px;
+        }
+        #first main,
+        .rivers-card {
+            display: flex;
+            flex-direction: column;
+            flex: 1;
+        }
+        .rivers-card > a {
+            align-self: center;
+            border-radius: 12px;
+        }
+        .rivers-card > a:focus-visible {
+            outline: 3px solid #ffe0a0;
+            outline-offset: 5px;
+        }
+        img {
+            border: 4px solid #fffaf1;
+            border-radius: 12px;
+            box-sizing: border-box;
+            display: block;
+            width: 220px;
+            max-width: 100%;
+            height: 240px;
+            object-fit: cover;
+            object-position: center top;
+            margin: 0;
+        }
+        li {
+            color: #fffaf1;
+            font-size: 16px;
+            line-height: 1.55;
+        }
+        ul {
+            margin: 18px 0 20px;
+            list-style: none;
+            text-align: left;
+            padding: 0;
+        }
+
+        .project-links {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin: 0 auto 28px;
+        }
+
+        .home-link {
+            display: block;
+            width: 190px;
+            margin: 0;
+            padding: 12px;
+            background-color: #164e70;
+            color: white;
+            border-radius: 8px;
+            text-align: center;
+            text-decoration: none;
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 16px;
+        }
+
+        .home-link:hover {
+            background-color: #12364a;
+        }
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 28px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        @media (max-width: 1100px) {
+            .cards {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+                max-width: 820px;
+            }
+        }
+
+        @media (max-width: 750px) {
+            body {
+                padding: 20px 16px 36px;
+            }
+            .cards {
+                grid-template-columns: 1fr;
+                max-width: 390px;
+                gap: 24px;
+            }
+            h1 {
+                font-size: 30px;
+            }
+        }
+        @media (prefers-reduced-motion: reduce) {
+            #first {
+                transition: none;
+            }
+            #first:hover {
+                transform: none;
+            }
+        }
+        
+    </style>
+</head>
+<body>
+    <nav class="project-links" aria-label="Project navigation">
+        <a class="home-link" href="../iceindex.html">Back to ICE Projects</a>
+        <a class="home-link" href="../../index.html">Home Page</a>
+    </nav>
+    <div class="cards">
+    <div id="first">
+        <h1>Dallin H. Oaks</h1>
+        <h2>18th President of the Church of Jesus Christ of Latter-Day Saints</h2>
+        <main class="img">
+            <section class="rivers-card">
+                <a href="https://www.churchofjesuschrist.org/learn/dallin-h-oaks?lang=eng">
+                    <img class="card-img" src="images/oaks.webp" alt="President Oaks">
+                </a>
+                <div id="second">
+                    <ul>
+                        <li>Born: Aug 12, 1932</li>
+                        <li>Apostle: Apr 7, 1984</li>
+                        <li>Prophet: Oct 14, 2025</li>
+                    </ul>
+                </div>
+                <p>"The number of good things we can do far exceeds the time available to accomplish them."</p>
+            </section>
+        </main>
+    </div>
+    
+    <div id="first">
+        <h1>Russell M. Nelson</h1>
+        <h2>17th President of the Church of Jesus Christ of Latter-Day Saints</h2>
+        <main class="img">
+            <section class="rivers-card">
+                <a href="https://www.churchofjesuschrist.org/learn/russell-m-nelson?lang=eng">
+                    <img class="card-img" src="images/nelson.webp" alt="President Nelson">
+                </a>
+                <div id="second">
+                    <ul>
+                        <li>Born: Sept. 9, 1924</li>
+                        <li>Apostle: Apr 12, 1984</li>
+                        <li>Prophet: Jan, 14, 2018</li>
+                    </ul>
+                </div>
+                <p>"Joy is powerful, and focusing on joy brings God’s power into our lives."</p>
+            </section>
+        </main>
+    </div>
+
+    <div id="first">
+            <h1>Thomas S. Monson</h1>
+            <h2>16th President of the Church of Jesus Christ of Latter-Day Saints</h2>
+            <main class="img">
+                <section class="rivers-card">
+                    <a href="https://www.churchofjesuschrist.org/learn/people/thomas-s-monson?lang=eng">
+                        <img class="card-img" src="images/monson.webp" alt="President Monson">
+                    </a>
+                    <div id="second">
+                        <ul>
+                            <li>Born: Aug 21, 1927</li>
+                            <li>Apostle: Oct 10, 1963</li>
+                            <li>Prophet: Feb 3, 2008</li>
+                        </ul>
+                    </div>
+                    <p>"The Lord is in the details of our lives."</p>
+                </section>
+            </main>
+        </div>
+
+        <div id="first">
+            <h1>Gordon B. Hinckley</h1>
+            <h2>15th President of the Church of Jesus Christ of Latter-Day Saints</h2>
+            <main class="img">
+                <section class="rivers-card">
+                    <a href="https://www.churchofjesuschrist.org/learn/people/gordon-b-hinckley?lang=eng">
+                        <img class="card-img" src="images/hinckley.webp" alt="President Hinkley">
+                    </a>
+                    <div id="second">
+                        <ul>
+                            <li>Born: June 23, 1910</li>
+                            <li>Apostle: Oct. 5, 1961</li>
+                            <li>Prophet: Mar. 12, 1995</li>
+                        </ul>
+                    </div>
+                    <p>"May we go with determination to try a little harder to be a little better."</p>
+                </section>
+            </main>
+        </div>
+
+         <div id="first">
+            <h1>Howard W. Hunter</h1>
+            <h2>14th President of the Church of Jesus Christ of Latter-Day Saints</h2>
+            <main class="img">
+                <section class="rivers-card">
+                    <a href="https://www.churchofjesuschrist.org/learn/people/howard-w-hunter?lang=eng">
+                        <img class="card-img" src="images/howard.webp" alt="President Hunter">
+                    </a>
+                    <div id="second">
+                        <ul>
+                            <li>Born: Nov. 14, 1907</li>
+                            <li>Apostle: Oct. 15, 1959</li>
+                            <li>Prophet: June 5, 1994</li>
+                        </ul>
+                    </div>
+                    <p>"To give of oneself is a holy gift."</p>
+                </section>
+            </main>
+        </div>
+
+        <div id="first">
+            <h1>Ezra Taft Benson</h1>
+            <h2>13th President of the Church of Jesus Christ of Latter-Day Saints</h2>
+            <main class="img">
+                <section class="rivers-card">
+                    <a href="https://www.churchofjesuschrist.org/learn/people/ezra-taft-benson?lang=eng">
+                        <img class="card-img" src="images/benson.webp" alt="President Benson">
+                    </a>
+                    <div id="second">
+                        <ul>
+                            <li>Born: Aug. 4, 1899</li>
+                            <li>Apostle: Oct. 7, 1943</li>
+                            <li>Prophet: Nov. 10, 1985</li>
+                        </ul>
+                    </div>
+                    <p>"Repentance means change, and it takes a humble person to change."</p>
+                </section>
+            </main>
+        </div>
+
+        <div id="first">
+            <h1>Spencer W. Kimball</h1>
+            <h2>12th President of the Church of Jesus Christ of Latter-Day Saints</h2>
+            <main class="img">
+                <section class="rivers-card">
+                    <a href="https://www.churchofjesuschrist.org/learn/people/spencer-w-kimball?lang=eng">
+                        <img class="card-img" src="images/kimball.webp" alt="President Kimball">
+                    </a>
+                    <div id="second">
+                        <ul>
+                            <li>Born: Mar. 28, 1895</li>
+                            <li>Apostle: Oct. 7, 1943</li>
+                            <li>Prophet: Dec. 30, 1973</li>
+                        </ul>
+                    </div>
+                    <p>"God does notice us, and he watches over us."</p>
+                </section>
+            </main>
+        </div>
+
+        <div id="first">
+            <h1>Harold B. Lee</h1>
+            <h2>11th President of the Church of Jesus Christ of Latter-Day Saints</h2>
+            <main class="img">
+                <section class="rivers-card">
+                    <a href="https://www.churchofjesuschrist.org/learn/people/harold-b-lee?lang=eng">
+                        <img class="card-img" src="images/lee.webp" alt="President Lee">
+                    </a>
+                    <div id="second">
+                        <ul>
+                            <li>Born: Mar. 28, 1899</li>
+                            <li>Apostle: Apr. 10, 1941</li>
+                            <li>Prophet: July 7, 1972</li>
+                        </ul>
+                    </div>
+                    <p>"You cannot lift another soul until you are standing on higher ground than he is."</p>
+                </section>
+            </main>
+        </div>
+
+        <div id="first">
+            <h1>Joseph Fielding Smith</h1>
+            <h2>10th President of the Church of Jesus Christ of Latter-Day Saints</h2>
+            <main class="img">
+                <section class="rivers-card">
+                    <a href="https://www.churchofjesuschrist.org/learn/people/joseph-fielding-smith?lang=eng">
+                        <img class="card-img" src="images/fielding.webp" alt="President Smith">
+                    </a>
+                    <div id="second">
+                        <ul>
+                            <li>Born: July 19, 1876</li>
+                            <li>Apostle: Apr. 7, 1910</li>
+                            <li>Prophet: Jan. 23, 1970</li>
+                        </ul>
+                    </div>
+                    <p>"We are commanded to love one another."</p>
+                </section>
+            </main>
+        </div>
+
+        <div id="first">
+            <h1>David O. McKay</h1>
+            <h2>9th President of the Church of Jesus Christ of Latter-Day Saints</h2>
+            <main class="img">
+                <section class="rivers-card">
+                    <a href="https://www.churchofjesuschrist.org/learn/people/david-o-mckay?lang=eng">
+                        <img class="card-img" src="images/mckay.webp" alt="President McKay">
+                    </a>
+                    <div id="second">
+                        <ul>
+                            <li>Born: Sept. 8, 1873</li>
+                            <li>Apostle: Apr. 9, 1906</li>
+                            <li>Prophet: Apr. 9, 1951</li>
+                        </ul>
+                    </div>
+                    <p>"True Christianity is love in action."</p>
+                </section>
+            </main>
+        </div>
+
+        <div id="first">
+            <h1>George Albert Smith</h1>
+            <h2>8th President of the Church of Jesus Christ of Latter-Day Saints</h2>
+            <main class="img">
+                <section class="rivers-card">
+                    <a href="https://www.churchofjesuschrist.org/learn/people/george-albert-smith?lang=eng">
+                        <img class="card-img" src="images/albert.webp" alt="President Smith">
+                    </a>
+                    <div id="second">
+                        <ul>
+                            <li>Born: Apr. 4, 1870</li>
+                            <li>Apostle: Oct. 8, 1903</li>
+                            <li>Prophet: May 21, 1945</li>
+                        </ul>
+                    </div>
+                    <p>"Let us do better than we have ever done before."</p>
+                </section>
+            </main>
+        </div>
+
+        <div id="first">
+            <h1>Heber J. Grant</h1>
+            <h2>7th President of the Church of Jesus Christ of Latter-Day Saints</h2>
+            <main class="img">
+                <section class="rivers-card">
+                    <a href="https://www.churchofjesuschrist.org/learn/people/heber-j-grant?lang=eng">
+                        <img class="card-img" src="images/grant.webp" alt="President Grant">
+                    </a>
+                    <div id="second">
+                        <ul>
+                            <li>Born: Nov. 22, 1856</li>
+                            <li>Apostle: Oct. 16, 1882</li>
+                            <li>Prophet: Nov. 23, 1918</li>
+                        </ul>
+                    </div>
+                    <p>"Faith and knowledge without practice are of no value."</p>
+                </section>
+            </main>
+        </div>
+
+        <div id="first">
+            <h1>Joseph F. Smith</h1>
+            <h2>6th President of the Church of Jesus Christ of Latter-Day Saints</h2>
+            <main class="img">
+                <section class="rivers-card">
+                    <a href="https://www.churchofjesuschrist.org/learn/people/joseph-f-smith?lang=eng">
+                        <img class="card-img" src="images/joseph_f.webp" alt="President Smith">
+                    </a>
+                    <div id="second">
+                        <ul>
+                            <li>Born: Nov. 13, 1838</li>
+                            <li>Apostle: July 1, 1866</li>
+                            <li>Prophet: Oct. 17, 1901</li>
+                        </ul>
+                    </div>
+                    <p>"My religion teaches me to love all men."</p>
+                </section>
+            </main>
+        </div>
+
+        <div id="first">
+            <h1>Lorenzo Snow</h1>
+            <h2>5th President of the Church of Jesus Christ of Latter-Day Saints</h2>
+            <main class="img">
+                <section class="rivers-card">
+                    <a href="https://www.churchofjesuschrist.org/learn/people/lorenzo-snow?lang=eng">
+                        <img class="card-img" src="images/snow.webp" alt="President Snow">
+                    </a>
+                    <div id="second">
+                        <ul>
+                            <li>Born: Apr. 3, 1814</li>
+                            <li>Apostle: Feb. 12, 1849</li>
+                            <li>Prophet: Sept. 13, 1898</li>
+                        </ul>
+                    </div>
+                    <p>"Do not expect to become perfect at once."</p>
+                </section>
+            </main>
+        </div>
+
+        <div id="first">
+            <h1>Wilford Woodruff</h1>
+            <h2>4th President of the Church of Jesus Christ of Latter-Day Saints</h2>
+            <main class="img">
+                <section class="rivers-card">
+                    <a href="https://www.churchofjesuschrist.org/learn/people/wilford-woodruff?lang=eng">
+                        <img class="card-img" src="images/woodruff.webp" alt="President Woodruff">
+                    </a>
+                    <div id="second">
+                        <ul>
+                            <li>Born: Mar. 1, 1807</li>
+                            <li>Apostle: Apr. 26, 1839</li>
+                            <li>Prophet: Apr. 7, 1889</li>
+                        </ul>
+                    </div>
+                    <p>"We are safe as long as we do our duty."</p>
+                </section>
+            </main>
+        </div>
+
+        <div id="first">
+            <h1>John Taylor</h1>
+            <h2>3rd President of the Church of Jesus Christ of Latter-Day Saints</h2>
+            <main class="img">
+                <section class="rivers-card">
+                    <a href="https://www.churchofjesuschrist.org/learn/people/john-taylor?lang=eng">
+                        <img class="card-img" src="images/taylor.webp" alt="President Taylor">
+                    </a>
+                    <div id="second">
+                        <ul>
+                            <li>Born: Nov. 1, 1808</li>
+                            <li>Apostle: Dec. 19, 1838</li>
+                            <li>Prophet: Oct. 10, 1880</li>
+                        </ul>
+                    </div>
+                    <p>"Let us cultivate the spirit of love and kindness, and let every little unpleasantness be buried."</p>
+                </section>
+            </main>
+        </div>
+
+        <div id="first">
+            <h1>Brigham Young</h1>
+            <h2>2nd President of the Church of Jesus Christ of Latter-Day Saints</h2>
+            <main class="img">
+                <section class="rivers-card">
+                    <a href="https://www.churchofjesuschrist.org/learn/people/brigham-young?lang=eng">
+                        <img class="card-img" src="images/young.webp" alt="President Young">
+                    </a>
+                    <div id="second">
+                        <ul>
+                            <li>Born: June 1, 1801</li>
+                            <li>Apostle: Feb. 14, 1835</li>
+                            <li>Prophet: Dec. 27, 1847</li>
+                        </ul>
+                    </div>
+                    <p>"If we do not feel like it, we should pray till we do."</p>
+                </section>
+            </main>
+        </div>
+
+        <div id="first">
+            <h1>Joseph Smith</h1>
+            <h2>1st President of the Church of Jesus Christ of Latter-Day Saints</h2>
+            <main class="img">
+                <section class="rivers-card">
+                    <a href="https://www.churchofjesuschrist.org/learn/people/joseph-smith-jr?lang=eng">
+                        <img class="card-img" src="images/smith.webp" alt="President Smith">
+                    </a>
+                    <div id="second">
+                        <ul>
+                            <li>Born: Dec. 23, 1805</li>
+                            <li>Apostle: Spring 1829</li>
+                            <li>Prophet: Apr. 6, 1830*</li>
+                        </ul>
+                    </div>
+                    <p>"When the Lord commands, do it."</p>
+                </section>
+            </main>
+        </div>
+        </div>
+</body>
+</html>
