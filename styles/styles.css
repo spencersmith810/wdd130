@@ -31,11 +31,12 @@ header{
     align-items: center;
     justify-content: center;
     gap: 25px;
-    padding: 40px 30px;
+    padding-bottom: 1px;
+    padding-top: 30px;
     background: linear-gradient(#fcfbea);
 }
 header img{
-    width: 120px;
+    width: 200px;
     height: auto;
 }
 
