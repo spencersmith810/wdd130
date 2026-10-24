@@ -77,6 +77,7 @@
                 <h2>Contact Me</h2>
 
                     <form
+                        id="contact-form"
                         class="contact-form"
                         action="https://formspree.io/f/mzeezbrn"
                         method="POST"
@@ -113,10 +114,36 @@
                         ></textarea>
 
                         <button type="submit">Send My Message</button>
+                        <p id="form-status" role="status" aria-live="polite"></p>
                 </form>
             </section>
         &copy; 2026 Spencer Smith</footer>
     </div>
+    <script>
+        const contactForm = document.querySelector("#contact-form");
+        const formStatus = document.querySelector("#form-status");
+
+        contactForm.addEventListener("submit", async (event) => {
+            event.preventDefault();
+            formStatus.textContent = "Sending...";
+
+            try {
+                const response = await fetch(contactForm.action, {
+                    method: "POST",
+                    body: new FormData(contactForm),
+                    headers: { Accept: "application/json" }
+                });
+
+                if (response.ok) {
+                    window.location.href = "https://spencersmith810.github.io/wdd130/";
+                } else {
+                    formStatus.textContent = "Something went wrong. Please try again.";
+                }
+            } catch (error) {
+                formStatus.textContent = "Unable to send your message. Please try again.";
+            }
+        });
+    </script>
 </body>
 
 </html>
