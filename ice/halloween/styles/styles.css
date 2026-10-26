@@ -1,0 +1,926 @@
+@import url('https://fonts.googleapis.com/css2?family=Creepster&family=DM+Sans:wght@400;500;600;700&display=swap');
+
+/*
+   THE MIDNIGHT FIELD GUIDE
+   Only this stylesheet changes; the supplied HTML and illustration stay intact.
+
+   Learning map:
+   1. Custom properties are our design controls.
+   2. Grid places the original elements in a completely new layout.
+   3. Pseudo-elements create decorations and visible learning material.
+   4. Transforms animate without repeatedly rebuilding the page layout.
+   5. Media queries adapt the experience to screen size and motion preferences.
+
+   Assignment compromise: generated text is appropriate for this CSS exercise,
+   but real educational content belongs in semantic HTML in a production site.
+   The starter zombie filler remains in the HTML; font-size: 0 suppresses it
+   visually while the two paragraph pseudo-elements display researched facts.
+
+   Sources (facts below are paraphrased; folklore is identified as folklore):
+   https://blogs.loc.gov/headlinesandheroes/2021/10/the-origins-of-halloween-traditions/
+   https://source.museum.ie/en-IE/News/2023/Ghost-turnips,-pucas,-fortune-telling-and-evil-abd
+   https://www.bats.org.uk/about-bats/fun-facts-about-bats-2
+   https://medicalmuseum.health.mil/index.cfm/visit/exhibits/past/visiblyhuman/page_05
+*/
+
+/* 1. DESIGN CONTROLS — try changing these first. */
+:root {
+    color-scheme: dark;
+    --night: #0b100f;
+    --panel: #141c19;
+    --bone: #f3edda;
+    --muted: #b1b7a8;
+    --orange: #ff8749;
+    --green: #c0d68e;
+    --violet: #c6b4ec;
+    --line: #333d33;
+    --display: 'Creepster', Impact, fantasy;
+    --body: 'DM Sans', system-ui, sans-serif;
+    --mono: 'Courier New', monospace;
+    --haunt-speed: 7s;
+    --room-glow: #00000000;
+    --watcher-color: #c0d68e;
+}
+
+/* Registering a color lets the browser interpolate it smoothly inside gradients.
+   Without @property support the color still changes; it simply changes directly. */
+@property --room-glow {
+    syntax: '<color>';
+    inherits: true;
+    initial-value: #00000000;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+html {
+    background: var(--night);
+}
+
+body {
+    min-width: 280px;
+    margin: 0;
+    color: var(--bone);
+    background:
+        radial-gradient(ellipse at 50% 85%, var(--room-glow), transparent 75%),
+        radial-gradient(ellipse at 82% 24%, #21463a55, transparent 42%),
+        radial-gradient(ellipse at 0% 56%, #70311822, transparent 35%),
+        repeating-linear-gradient(90deg, transparent 0 89px, #d4e4a603 90px),
+        var(--night);
+    font-family: var(--body);
+    line-height: 1.6;
+    isolation: isolate;
+    transition: --room-glow 900ms ease;
+}
+
+::selection {
+    color: var(--night);
+    background: var(--orange);
+}
+
+/* 2. ATMOSPHERE — transparent layers never intercept clicks or selection. */
+body::before,
+body::after {
+    position: fixed;
+    z-index: -1;
+    pointer-events: none;
+    content: '';
+}
+
+body::before {
+    inset: 22% -12% -12%;
+    background:
+        radial-gradient(ellipse at 60% 30%, var(--room-glow), transparent 65%),
+        radial-gradient(ellipse at 25% 70%, #a5c7ac18, transparent 44%),
+        radial-gradient(ellipse at 80% 65%, #a5c7ac12, transparent 40%);
+    animation: fog-drift 22s ease-in-out infinite alternate;
+}
+
+body::after {
+    inset: 0;
+    opacity: 0.32;
+    background-image: radial-gradient(#c9d6a56b 0.65px, transparent 0.9px);
+    background-size: 7px 7px;
+    mask-image: linear-gradient(black, transparent 80%);
+}
+
+#wrapper {
+    position: relative;
+    width: min(1200px, calc(100% - 6rem));
+    margin-inline: auto;
+}
+
+/* A ghost made from gradients and a clipped shape, with no image asset. */
+#wrapper::before {
+    position: absolute;
+    z-index: 0;
+    top: 23rem;
+    right: 3.8rem;
+    width: 52px;
+    height: 68px;
+    border-radius: 50% 50% 0 0;
+    background:
+        radial-gradient(ellipse at 35% 38%, #18221e 0 3px, transparent 3.5px),
+        radial-gradient(ellipse at 66% 38%, #18221e 0 3px, transparent 3.5px),
+        radial-gradient(ellipse at 50% 61%, #18221e 0 3px, transparent 3.5px),
+        #e5edcd;
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 78% 87%, 60% 100%, 40% 87%, 20% 100%, 0 87%);
+    opacity: 0;
+    pointer-events: none;
+    content: '';
+    transform: translate(0, 2rem) rotate(-12deg);
+    transition: opacity 350ms ease, transform 650ms cubic-bezier(0.2, 0.7, 0.3, 1);
+}
+
+/* Fixed positioning keeps the bat in the room as we scroll past its exhibit.
+   Independent scale/translate properties can combine with its flight animation. */
+#wrapper::after {
+    position: fixed;
+    z-index: -1;
+    top: 30vh;
+    right: 4vw;
+    width: 78px;
+    height: 32px;
+    background: var(--green);
+    clip-path: polygon(0 0, 24% 20%, 39% 45%, 43% 7%, 50% 27%, 57% 7%, 61% 45%, 76% 20%, 100% 0, 91% 75%, 72% 64%, 60% 100%, 50% 78%, 40% 100%, 28% 64%, 9% 75%);
+    opacity: 0.27;
+    pointer-events: none;
+    content: '';
+    animation: bat-flight 16s ease-in-out infinite;
+    scale: 1;
+    translate: 0 0;
+    transition: scale 1200ms ease, translate 1200ms ease, opacity 900ms ease;
+}
+
+/* 3. FOUR QUICK FACTS — the original list items are labels, not links. */
+header {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 1.6rem;
+    padding-top: 1.8rem;
+}
+
+header::before {
+    align-self: center;
+    content: 'THE MIDNIGHT FIELD GUIDE';
+    font: 700 0.76rem / 1.5 var(--mono);
+    letter-spacing: 0.15em;
+}
+
+header::after {
+    grid-column: 2;
+    grid-row: 1;
+    align-self: center;
+    padding: 0.35rem 0.8rem;
+    border: 1px solid #78905466;
+    border-radius: 2px;
+    color: var(--green);
+    content: '●  OPEN AFTER DARK';
+    font: 700 0.65rem / 1.5 var(--mono);
+    letter-spacing: 0.08em;
+}
+
+nav {
+    grid-column: 1 / -1;
+}
+
+/* Our hidden watcher lives in the margin, behind the readable content.
+   The first two gradients draw pupils; the other two draw glowing eyes. */
+nav::before {
+    position: fixed;
+    z-index: -1;
+    bottom: 12vh;
+    left: clamp(0.6rem, 1.5vw, 2rem);
+    width: 56px;
+    height: 24px;
+    background:
+        radial-gradient(ellipse 2px 6px at 24% 50%, #050907 90%, transparent),
+        radial-gradient(ellipse 2px 6px at 76% 50%, #050907 90%, transparent),
+        radial-gradient(ellipse 10px 5px at 24% 50%, var(--watcher-color) 65%, transparent 90%),
+        radial-gradient(ellipse 10px 5px at 76% 50%, var(--watcher-color) 65%, transparent 90%);
+    filter: drop-shadow(0 0 6px var(--watcher-color));
+    opacity: 0.4;
+    pointer-events: none;
+    content: '';
+    animation: shadow-watcher 14s ease-in-out infinite;
+}
+
+/* A single pseudo-element contains both a silk thread and an inline SVG spider. */
+nav::after {
+    position: fixed;
+    z-index: -1;
+    top: 0;
+    right: 1rem;
+    width: 40px;
+    height: 230px;
+    background:
+        linear-gradient(#81947866, #819478aa) center top / 1px calc(100% - 24px) no-repeat,
+        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48' fill='none' stroke='%2396a58b' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m18 22-8-8-5 1m13 12L6 23l-3 4m15 4L7 34l-2 6m14-6-7 7v5m18-24 8-8 5 1m-13 12 12-4 3 4m-15 4 11 3 2 6m-14-6 7 7v5'/%3E%3Cellipse cx='24' cy='29' rx='7' ry='10' fill='%23434f3e'/%3E%3Ccircle cx='24' cy='18' r='5' fill='%23687958'/%3E%3C/svg%3E") center bottom / 40px 40px no-repeat;
+    pointer-events: none;
+    content: '';
+    transform-origin: 50% 0;
+    animation: silk-descent 18s ease-in-out infinite;
+}
+
+nav ul {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    margin: 0;
+    padding: 0;
+    border-block: 1px solid var(--line);
+    list-style: none;
+    counter-reset: quick-fact;
+}
+
+nav li {
+    position: relative;
+    padding: 1rem 1.1rem 1.1rem;
+    font-size: 0.82rem;
+    font-weight: 700;
+    counter-increment: quick-fact;
+    transition: background-color 250ms ease, color 250ms ease;
+}
+
+nav li + li {
+    border-left: 1px solid var(--line);
+}
+
+nav li::before {
+    margin-right: 0.6rem;
+    color: var(--orange);
+    content: '0' counter(quick-fact) ' /';
+    font: 0.7rem var(--mono);
+}
+
+nav li::after {
+    display: block;
+    margin-top: 0.4rem;
+    color: var(--muted);
+    font-size: 0.72rem;
+    font-weight: 400;
+    line-height: 1.65;
+}
+
+nav li:nth-child(1)::after {
+    content: 'Guisers performed at neighbours\2019  doors to earn a treat. [1]';
+}
+
+nav li:nth-child(2)::after {
+    content: 'Trick-or-treating boomed in the 1950s, helping popularize wrapped candy. [2]';
+}
+
+nav li:nth-child(3)::after {
+    content: 'Before pumpkins, carved turnips lit the Halloween night. [1]';
+}
+
+nav li:nth-child(4)::after {
+    content: 'In Irish folklore, Halloween spirits could return to the family home. [1]';
+}
+
+/* 4. HERO — one grid, using only the elements supplied in the exercise. */
+main {
+    display: grid;
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    grid-template-rows: auto auto auto auto;
+    align-items: start;
+    gap: 0 1.4rem;
+    padding-block: 4rem 2.5rem;
+    counter-reset: exhibit;
+}
+
+main::before {
+    grid-column: 1 / 8;
+    grid-row: 1;
+    margin-bottom: 1.3rem;
+    color: var(--orange);
+    content: 'OCTOBER 31     /     THE CURIOSITY COLLECTION';
+    font: 700 0.66rem / 1.8 var(--mono);
+    letter-spacing: 0.13em;
+}
+
+h1 {
+    z-index: 1;
+    grid-column: 1 / 8;
+    grid-row: 2;
+    max-width: 8.6ch;
+    margin: 0;
+    color: var(--bone);
+    font: 400 clamp(5rem, 9.6vw, 8.5rem) / 0.95 var(--display);
+    letter-spacing: 0.005em;
+    text-shadow: 3px 4px 0 #0b100f, 5px 6px 0 #f58b4955;
+    transform: rotate(-2deg);
+    transition: text-shadow 700ms ease;
+}
+
+h1::after {
+    display: block;
+    width: fit-content;
+    margin-top: 1.3rem;
+    padding: 0.45rem 0.7rem;
+    border: 1px solid #ff874977;
+    color: var(--orange);
+    background: #211c12;
+    content: 'A LITTLE FEAR. A LOT TO DISCOVER.';
+    font: 700 0.65rem / 1.6 var(--mono);
+    letter-spacing: 0.05em;
+    text-shadow: none;
+    transform: rotate(2deg);
+}
+
+main > img {
+    position: relative;
+    z-index: 1;
+    grid-column: 8 / -1;
+    grid-row: 1 / 4;
+    align-self: center;
+    width: 100%;
+    height: auto;
+    margin-top: 0.3rem;
+    padding: 0.5rem;
+    border: 1px solid #7d9b6766;
+    border-radius: 48% 48% 4px 4px;
+    background: #1d2a22;
+    box-shadow: 0 0 0 7px #17211b, 0 0 0 8px #6b814a55, 0 28px 65px #0008;
+    transform: rotate(3deg);
+    animation: haunted-portrait var(--haunt-speed) ease-in-out infinite;
+    transition: filter 400ms ease, box-shadow 400ms ease;
+}
+
+main::after {
+    grid-column: 1 / 7;
+    grid-row: 3;
+    max-width: 39ch;
+    margin-top: 2rem;
+    padding-bottom: 3.2rem;
+    color: var(--muted);
+    content: 'Step into the strange. Uncover the folklore, meet the night\2019 s misunderstood creatures, and find the science hiding beneath the scares.';
+    font-size: 0.97rem;
+    line-height: 1.9;
+}
+
+/* 5. EXHIBITS — the same component, three inherited accent colors. */
+section {
+    --accent: var(--orange);
+    --glow: #ff87491c;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-self: stretch;
+    grid-column: span 4;
+    grid-row: 4;
+    min-width: 0;
+    margin-top: 3rem;
+    padding: 1.65rem;
+    border: 1px solid var(--line);
+    border-top: 2px solid var(--accent);
+    border-radius: 3px;
+    background:
+        radial-gradient(ellipse at 100% 0%, var(--glow), transparent 65%),
+        var(--panel);
+    box-shadow: 0 18px 45px #0003;
+    counter-increment: exhibit;
+    transform: perspective(1100px) rotateX(0deg) rotateY(0deg);
+    transform-style: preserve-3d;
+    transition: transform 350ms ease, border-color 350ms ease, box-shadow 350ms ease;
+}
+
+section:nth-of-type(2) {
+    --accent: var(--green);
+    --glow: #c0d68e18;
+}
+
+section:nth-of-type(3) {
+    --accent: var(--violet);
+    --glow: #c6b4ec18;
+}
+
+section::before {
+    display: block;
+    margin-bottom: 1.2rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--line);
+    color: var(--accent);
+    content: 'EXHIBIT 0' counter(exhibit) '     /     LOOK CLOSER';
+    font: 700 0.62rem / 1.8 var(--mono);
+    letter-spacing: 0.04em;
+}
+
+h2 {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin: 0 0 1.2rem;
+    color: var(--bone);
+    font: 400 2.7rem / 1.1 var(--display);
+    letter-spacing: 0.025em;
+    transform-style: preserve-3d;
+    transition: transform 350ms ease;
+}
+
+/* Inline SVG masks keep these tiny line icons editable inside the CSS. */
+h2::before {
+    flex: 0 0 36px;
+    width: 36px;
+    height: 36px;
+    background: var(--accent);
+    content: '';
+    mask: var(--icon) center / contain no-repeat;
+    transition: transform 350ms ease;
+}
+
+section:nth-of-type(1) {
+    --icon: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40' fill='none' stroke='black' stroke-width='2'%3E%3Cpath d='M20 12C8 4 0 28 12 34c4 2 5 0 8 0s4 2 8 0C40 28 32 4 20 12Zm0 0c-7 1-9 20 0 22m0-22c7 1 9 20 0 22m0-22c-1-5 2-8 6-8'/%3E%3Cpath d='m11 23 4-4 2 5m6 0 2-5 4 4m-15 4 6 3 6-3'/%3E%3C/svg%3E");
+}
+
+section:nth-of-type(2) {
+    --icon: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40' fill='none' stroke='black' stroke-width='2' stroke-linejoin='round'%3E%3Cpath d='M3 9c7 1 9 4 13 7l1-7 3 4 3-4 1 7c4-3 6-6 13-7l-4 18-7-3-6 8-6-8-7 3Z'/%3E%3C/svg%3E");
+}
+
+section:nth-of-type(3) {
+    --icon: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40' fill='none' stroke='black' stroke-width='2' stroke-linejoin='round'%3E%3Cpath d='M11 28C1 21 6 4 20 4s19 17 9 24v7H11Zm4 0v7m5-7v7m5-7v7m-7-10 2-4 2 4'/%3E%3Ccircle cx='13' cy='18' r='4'/%3E%3Ccircle cx='27' cy='18' r='4'/%3E%3C/svg%3E");
+}
+
+section p {
+    margin: 0;
+    font-size: 0;
+    transition: transform 350ms ease;
+}
+
+section p::before,
+section p::after {
+    display: block;
+    white-space: pre-line;
+    font-size: 0.91rem;
+    line-height: 1.85;
+}
+
+section p::before {
+    min-height: 14em;
+    color: #d3d8ca;
+}
+
+section:nth-of-type(1) p::before {
+    content: 'THE ORIGINAL LANTERN WASN\2019 T A PUMPKIN.\a\a In Ireland, people carved frightening faces into turnips and lit them as lanterns. The familiar pumpkin version developed in America. [1]\a\a The legend of Stingy Jack tells of a wandering soul carrying an ember inside a turnip. That\2019 s folklore, not a documented ghost sighting. [2]';
+}
+
+section:nth-of-type(2) p::before {
+    content: 'BLIND AS A BAT? NOT EVEN CLOSE.\a\a All bat species can see. Many also use echolocation: they send out sounds and listen for returning echoes to navigate and hunt. [3]\a\a Bats are the only mammals capable of true powered flight. A flying squirrel glides; a bat actually flies. [3]';
+}
+
+section:nth-of-type(3) p::before {
+    content: 'YOUR SKELETON IS ALIVE.\a\a A typical adult skeleton contains 206 bones. Bone is living tissue, not just a dry framework holding you together. [4]\a\a Inside bones, marrow produces red blood cells. Bones also store minerals, including calcium and phosphorus. Your Halloween costume has a remarkable engineering team underneath. [4]';
+}
+
+section p::after {
+    margin-top: 1.4rem;
+    padding: 1rem;
+    border-left: 2px solid var(--accent);
+    color: var(--bone);
+    background: #ffffff05;
+    font-size: 0.78rem;
+    line-height: 1.8;
+}
+
+section:nth-of-type(1) p::after {
+    content: 'THINK ABOUT IT\a Why might a larger, softer vegetable become a popular carving material?';
+}
+
+section:nth-of-type(2) p::after {
+    content: 'THINK ABOUT IT\a Which technology also locates objects by sending signals and measuring their return: sonar or a compass?';
+}
+
+section:nth-of-type(3) p::after {
+    content: 'THINK ABOUT IT\a If bone were only a rigid support, how would you explain its role in making blood cells?';
+}
+
+section::after {
+    display: block;
+    margin-top: auto;
+    padding-top: 1.4rem;
+    color: var(--muted);
+    font: 0.7rem / 1.8 var(--mono);
+}
+
+section:nth-of-type(1)::after {
+    content: '[1] NATIONAL MUSEUM OF IRELAND\a [2] LIBRARY OF CONGRESS';
+    white-space: pre-line;
+}
+
+section:nth-of-type(2)::after {
+    content: '[3] BAT CONSERVATION TRUST';
+}
+
+section:nth-of-type(3)::after {
+    content: '[4] NATIONAL MUSEUM OF HEALTH & MEDICINE';
+}
+
+/* 6. CLOSING NOTE — source numbers above also apply to the quick facts. */
+footer {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 1.5rem;
+    padding-block: 2rem;
+    border-top: 1px solid var(--line);
+    color: var(--muted);
+    font: 0.7rem / 1.8 var(--mono);
+}
+
+footer::before {
+    grid-column: 1 / -1;
+    max-width: 32ch;
+    margin-bottom: 0.8rem;
+    color: var(--green);
+    content: 'Stay curious. Even in the dark.';
+    font: 400 clamp(2.5rem, 5vw, 4rem) / 1.15 var(--display);
+}
+
+footer::after {
+    color: var(--muted);
+    content: 'HALLOWEEN = ALL HALLOWS\2019  EVE [2]';
+    font-size: 0.6rem;
+    letter-spacing: 0.04em;
+}
+
+/* 7. MOTION — no flashing, sound, or sudden full-screen surprises. */
+@keyframes fog-drift {
+    from { transform: translate3d(-3%, 3%, 0); }
+    to { transform: translate3d(5%, -3%, 0); }
+}
+
+@keyframes haunted-portrait {
+    0%, 100% { transform: translateY(0) rotate(3deg); }
+    50% { transform: translateY(-12px) rotate(1deg); }
+}
+
+@keyframes ghost-wander {
+    0%, 100% { transform: translate(0, 0) rotate(-8deg); }
+    50% { transform: translate(22px, -24px) rotate(8deg); }
+}
+
+@keyframes bat-flight {
+    0%, 100% { transform: translate(0, 0) rotate(-10deg); }
+    50% { transform: translate(-75px, 35px) rotate(12deg); }
+}
+
+@keyframes shadow-watcher {
+    0%, 100% { opacity: 0.18; transform: translateY(2px) scaleY(0.8); }
+    50% { opacity: 0.68; transform: translateY(-2px) scaleY(1); }
+}
+
+@keyframes silk-descent {
+    0%, 100% { transform: translateY(-145px) rotate(-2deg); }
+    50% { transform: translateY(25px) rotate(3deg); }
+}
+
+/* Scroll uses the independent translate property; hover owns transform.
+   That separation keeps an active reveal from overriding the 3D card tilt. */
+@keyframes exhibit-emerge {
+    from { opacity: 0.2; translate: 0 3rem; }
+    to { opacity: 1; translate: 0 0; }
+}
+
+/* Progressive enhancement: the default cards are fully visible. Only browsers
+   that understand BOTH features get a scroll timeline. Put animation-timeline
+   after the animation shorthand, which would otherwise reset the timeline.
+   Reference: https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/animation-timeline */
+@supports ((animation-timeline: view()) and (animation-range: entry 0% entry 45%)) {
+    @media (prefers-reduced-motion: no-preference) {
+        section {
+            animation: exhibit-emerge 1s linear both;
+            animation-timeline: view();
+            animation-range: entry 0% entry 45%;
+        }
+    }
+}
+
+/* Pointer effects are extra decoration; facts never depend on hover. */
+@media (hover: hover) and (pointer: fine) {
+    /* :has() observes the hovered exhibit; inherited properties recolor the room.
+       Translucent glows stay behind the opaque, high-contrast reading cards. */
+    body:has(section:nth-of-type(1):hover) {
+        --room-glow: #bf4d285e;
+        --watcher-color: var(--orange);
+    }
+
+    body:has(section:nth-of-type(2):hover) {
+        --room-glow: #6b934b59;
+        --watcher-color: var(--green);
+    }
+
+    body:has(section:nth-of-type(3):hover) {
+        --room-glow: #91a8ba4d;
+        --watcher-color: var(--violet);
+    }
+
+    #wrapper:has(section:nth-of-type(2):hover)::after {
+        opacity: 0.65;
+        scale: 2.2;
+        translate: -3vw 5vh;
+    }
+
+    h1:hover {
+        text-shadow: 3px 6px 0 #0b100f, 9px 16px 0 #f58b4944, 18px 30px 22px #ff87494d;
+    }
+
+    nav li:hover {
+        color: var(--orange);
+        background-color: #ff87490b;
+    }
+
+    main > img:hover {
+        animation-play-state: paused;
+    }
+
+    #wrapper:has(main > img:hover)::before {
+        opacity: 0.95;
+        transform: translate(3.5rem, -5.5rem) rotate(14deg);
+    }
+
+    section:hover {
+        z-index: 3;
+        border-color: var(--accent);
+        box-shadow: 0 24px 60px #0008, 0 0 35px var(--glow);
+        transform: perspective(1100px) translateY(-9px) rotateX(3deg) rotateY(-4deg);
+    }
+
+    section:nth-of-type(2):hover {
+        transform: perspective(1100px) translateY(-9px) rotateX(3deg) rotateY(4deg);
+    }
+
+    section:hover h2 {
+        transform: translateZ(24px);
+    }
+
+    section:hover p {
+        transform: translateZ(8px);
+    }
+
+    section:hover h2::before {
+        transform: translateZ(12px) rotate(-12deg) scale(1.08);
+    }
+
+    /* :has() lets one element react to a different element being hovered. */
+    main:has(section:nth-of-type(1):hover) > img {
+        filter: sepia(0.25) saturate(1.35);
+    }
+
+    main:has(section:nth-of-type(2):hover) > img {
+        filter: hue-rotate(18deg) saturate(1.2);
+    }
+
+    main:has(section:nth-of-type(3):hover) > img {
+        filter: invert(0.9) grayscale(1) contrast(1.1);
+    }
+}
+
+/* 8. RESPONSIVE LAYOUT — no fixed page width or clipped mobile cards. */
+@media (min-width: 1500px) {
+    h1 {
+        font-size: 9rem;
+    }
+}
+
+@media (max-width: 1000px) {
+    nav::after {
+        display: none;
+    }
+
+    #wrapper {
+        width: calc(100% - 3rem);
+    }
+
+    main {
+        gap: 0 1rem;
+    }
+
+    h1 {
+        font-size: clamp(4.8rem, 10.5vw, 7.5rem);
+    }
+
+    section {
+        padding: 1.2rem;
+    }
+
+    h2 {
+        gap: 0.5rem;
+        font-size: 2.1rem;
+    }
+}
+
+@media (max-width: 760px) {
+    header {
+        gap: 1.2rem;
+    }
+
+    header::before {
+        font-size: 0.65rem;
+    }
+
+    header::after {
+        font-size: 0.55rem;
+    }
+
+    nav ul {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    nav li:nth-child(3) {
+        border-left: 0;
+    }
+
+    nav li:nth-child(n + 3) {
+        border-top: 1px solid var(--line);
+    }
+
+    main {
+        grid-template-columns: minmax(0, 1fr);
+        grid-template-rows: auto;
+        padding-top: 2.5rem;
+    }
+
+    main::before,
+    main::after,
+    main h1,
+    main > img,
+    main section {
+        grid-column: 1;
+        grid-row: auto;
+    }
+
+    main::before {
+        text-align: center;
+        font-size: 0.6rem;
+    }
+
+    h1 {
+        justify-self: center;
+        margin-bottom: 2.5rem;
+        font-size: clamp(5.5rem, 17vw, 8rem);
+        text-align: center;
+    }
+
+    h1::after {
+        margin-inline: auto;
+        font-size: 0.58rem;
+    }
+
+    main > img {
+        justify-self: center;
+        width: min(82%, 440px);
+        margin-bottom: 2rem;
+    }
+
+    main::after {
+        order: 1;
+        max-width: 48ch;
+        margin: 0.5rem auto 1rem;
+        padding-bottom: 0;
+        text-align: center;
+    }
+
+    main section {
+        order: 2;
+        margin-top: 1.4rem;
+        padding: 1.6rem;
+    }
+
+    section p::before {
+        min-height: 0;
+    }
+
+    h2 {
+        font-size: 2.7rem;
+    }
+
+    #wrapper::before {
+        top: 45rem;
+        right: 12%;
+    }
+
+    #wrapper::after {
+        top: 23rem;
+        right: 1.5rem;
+    }
+
+    footer {
+        grid-template-columns: 1fr;
+        gap: 0.65rem;
+    }
+}
+
+/* Touch screens get a gently floating ghost, since there is no hover gesture. */
+@media (hover: none) {
+    #wrapper::before {
+        z-index: 2;
+        opacity: 0.55;
+        animation: ghost-wander 12s ease-in-out infinite;
+    }
+}
+
+@media (max-width: 400px) {
+    #wrapper {
+        width: calc(100% - 2rem);
+    }
+
+    header::after {
+        padding-inline: 0.4rem;
+        font-size: 0.46rem;
+    }
+
+    header::before {
+        font-size: 0.57rem;
+        letter-spacing: 0.06em;
+    }
+
+    nav li {
+        padding: 0.85rem;
+    }
+
+    nav li::after {
+        font-size: 0.68rem;
+    }
+
+    h1 {
+        font-size: clamp(3.8rem, 21vw, 5.3rem);
+    }
+}
+
+/* Honor the visitor's operating-system motion preference, including hover. */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation: none !important;
+        transition: none !important;
+    }
+
+    section:hover,
+    section:nth-of-type(2):hover,
+    section:hover h2,
+    section:hover p,
+    section:hover h2::before,
+    #wrapper:has(main > img:hover)::before {
+        transform: none;
+    }
+
+    section {
+        opacity: 1;
+        translate: none;
+    }
+
+    #wrapper:has(section:nth-of-type(2):hover)::after {
+        scale: 1;
+        translate: none;
+    }
+
+    nav::after {
+        display: none;
+    }
+}
+
+@media print {
+    :root {
+        --night: white;
+        --panel: white;
+        --bone: #111;
+        --muted: #333;
+        --line: #aaa;
+        --orange: #8a3500;
+        --green: #365400;
+        --violet: #633386;
+    }
+
+    body,
+    section {
+        background: white;
+    }
+
+    body::before,
+    body::after,
+    #wrapper::before,
+    #wrapper::after,
+    nav::before,
+    nav::after {
+        display: none;
+    }
+
+    *,
+    *::before,
+    *::after {
+        animation: none !important;
+        box-shadow: none !important;
+        text-shadow: none !important;
+    }
+
+    section p::before {
+        color: #222;
+    }
+
+    section {
+        break-inside: avoid;
+        opacity: 1;
+        translate: none;
+        transform: none;
+    }
+}
