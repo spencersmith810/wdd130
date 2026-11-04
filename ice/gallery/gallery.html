@@ -42,6 +42,26 @@
             text-transform: uppercase;
         }
 
+        .home-button {
+            background: #d8b36a;
+            border-radius: 0.35rem;
+            color: #151b29;
+            display: inline-block;
+            font-family: Arial, sans-serif;
+            font-size: 0.85rem;
+            font-weight: bold;
+            margin-top: 1rem;
+            padding: 0.65rem 1rem;
+            text-decoration: none;
+            transition: background 180ms ease, transform 180ms ease;
+        }
+
+        .home-button:hover,
+        .home-button:focus-visible {
+            background: #f4f7fb;
+            transform: translateY(-2px);
+        }
+
         #gallery {
             background-color: #ddd;
             background-image:
@@ -118,6 +138,7 @@
     <div id="wrapper">
         <nav>
             <h1>Christ Art Gallery</h1>
+            <a class="home-button" href="../../index.html">Home</a>
         </nav>
         <main>
             <div id="gallery">
