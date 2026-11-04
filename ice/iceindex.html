@@ -46,7 +46,7 @@
             padding: 0;
             margin: 35px 0;
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            grid-template-columns: repeat(3, minmax(0, 1fr));
             gap: 20px;
         }
 
@@ -116,6 +116,18 @@
             }
 
         }
+
+        @media (max-width: 700px) {
+            nav ul {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+        }
+
+        @media (max-width: 460px) {
+            nav ul {
+                grid-template-columns: 1fr;
+            }
+        }
     </style>
 </head>
 <body>
@@ -132,6 +144,7 @@
                 <li><a href="positioning/positioning.html" target="_blank" rel="noopener">Layout Lab</a></li>
                 <li><a href="halloween/index.html" target="_blank" rel="noopener">Halloween Page</a></li>
                 <li><a href="gallery/gallery.html" target="_blank" rel="noopener">Big Image Gallery</a></li>
+                <li><a href="signup/signup.html" target="_blank" rel="noopener">Daily Feed Signup</a></li>
             </ul>
         </nav>
     </header>
