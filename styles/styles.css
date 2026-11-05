@@ -212,6 +212,116 @@ h2 {
     padding-top: 74px;
 }
 
+.about-section {
+    display: grid;
+    grid-template-columns: minmax(260px, 0.85fr) 1.15fr;
+    gap: clamp(35px, 7vw, 90px);
+    align-items: center;
+    padding: 110px 0 25px;
+}
+
+.about-image-wrap {
+    position: relative;
+    background: var(--ink);
+}
+
+.about-image-wrap::after {
+    position: absolute;
+    z-index: 0;
+    inset: 14px -14px -14px 14px;
+    border: 1px solid var(--moss);
+    content: "";
+}
+
+.about-image-wrap img {
+    display: block;
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    aspect-ratio: 3 / 4;
+    object-fit: cover;
+    object-position: center 25%;
+    filter: saturate(0.85);
+}
+
+.about-image-label {
+    display: block;
+    position: absolute;
+    z-index: 2;
+    right: 14px;
+    bottom: 14px;
+    padding: 7px 9px;
+    background: var(--lime);
+    color: var(--ink);
+    font: 11px "college", sans-serif;
+    letter-spacing: 0.08em;
+}
+
+.about-content {
+    max-width: 560px;
+}
+
+.about-content h2 {
+    margin-bottom: 25px;
+}
+
+.about-content h2 span {
+    color: var(--moss);
+}
+
+.about-content p:not(.eyebrow) {
+    max-width: 500px;
+    margin: 0 0 18px;
+    color: #4b5d52;
+    line-height: 1.75;
+}
+
+.about-content .text-link {
+    display: inline-block;
+    margin-top: 10px;
+}
+
+.coursework-section {
+    padding-top: 110px;
+}
+
+.coursework-card {
+    display: flex;
+    align-items: end;
+    justify-content: space-between;
+    gap: 35px;
+    padding: 34px;
+    background: var(--paper);
+}
+
+.coursework-card > div {
+    max-width: 650px;
+}
+
+.coursework-label {
+    margin: 0 0 13px;
+    color: var(--orange);
+    font: 13px "college", sans-serif;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+}
+
+.coursework-card h3 {
+    margin: 0 0 12px;
+    font: 31px "college", sans-serif;
+}
+
+.coursework-card p:last-child {
+    max-width: 590px;
+    margin: 0;
+    color: #58685d;
+    line-height: 1.6;
+}
+
+.coursework-card .button {
+    flex-shrink: 0;
+}
+
 .section-heading {
     display: flex;
     align-items: end;
@@ -472,9 +582,19 @@ footer h2 {
     }
 
     .intro-strip,
+    .about-section,
+    .coursework-card,
     footer {
         grid-template-columns: 1fr;
         gap: 35px;
+    }
+
+    .coursework-card {
+        display: block;
+    }
+
+    .coursework-card .button {
+        margin-top: 25px;
     }
 
     .project-grid {
@@ -513,6 +633,14 @@ footer h2 {
     .intro-strip,
     .projects-section {
         padding-top: 55px;
+    }
+
+    .about-section {
+        padding-top: 75px;
+    }
+
+    .coursework-section {
+        padding-top: 75px;
     }
 
     .project-grid {

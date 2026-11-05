@@ -20,11 +20,11 @@
             <div class="hero-mark" aria-hidden="true"><span>01</span><i></i><strong>PORTFOLIO</strong></div>
         </header>
 
-        <nav class="site-nav" aria-label="Primary navigation"><a class="active" href="#top">Home</a><a href="#projects">Projects</a><a href="#about">About</a><a href="#contact">Contact</a></nav>
+        <nav class="site-nav" aria-label="Primary navigation"><a class="active" href="#top">Home</a><a href="#projects">Projects</a><a href="#coursework">Coursework</a><a href="#about">About</a><a href="#contact">Contact</a></nav>
 
         <main>
-            <section class="intro-strip" id="about" aria-labelledby="about-title">
-                <div><p class="eyebrow">The work so far</p><h2 id="about-title">Curious by nature.<br><span>Intentional by design.</span></h2></div>
+            <section class="intro-strip" aria-labelledby="intro-title">
+                <div><p class="eyebrow">The work so far</p><h2 id="intro-title">Curious by nature.<br><span>Intentional by design.</span></h2></div>
                 <p class="intro-text">Every project here started as an assignment and became a chance to practice something real: layout, hierarchy, accessibility, interaction, and the small details that make a page feel finished.</p>
             </section>
 
@@ -78,9 +78,89 @@
                     </article>
                 </div>
             </section>
+
+            <section class="about-section" id="about" aria-labelledby="about-title">
+                <div class="about-image-wrap">
+                    <img src="images/spencer.JPG" alt="Spencer standing outdoors with a mountain landscape behind him">
+                    <span class="about-image-label">02 / ABOUT</span>
+                </div>
+                <div class="about-content">
+                    <p class="eyebrow">A little about me</p>
+                    <h2 id="about-title">Building skills<br><span>one project at a time.</span></h2>
+                    <p>
+                        I’m Spencer, a student developer learning how thoughtful design and solid code work together. I enjoy turning an idea into a page that feels clear, useful, and genuinely enjoyable to explore.
+                    </p>
+                    <p>
+                        This portfolio documents that process: the experiments, the lessons, and the details I’m still learning to get right.
+                    </p>
+                    <a class="text-link" href="#contact">Let’s connect <span aria-hidden="true">↘</span></a>
+                </div>
+            </section>
+
+            <section class="coursework-section" id="coursework" aria-labelledby="coursework-title">
+                <div class="section-heading">
+                    <div>
+                        <p class="eyebrow">Beyond WDD 130</p>
+                        <h2 id="coursework-title">Other coursework</h2>
+                    </div>
+                    <span class="project-count">01 <small>COLLECTION</small></span>
+                </div>
+
+                <article class="coursework-card">
+                    <div>
+                        <p class="coursework-label">CSE 110 / Python</p>
+                        <h3>Spencer’s Python Notebook</h3>
+                        <p>A collection of assignments from Weeks 1–8, with explanations, preserved source code, interactive browser demos, and the Rescue Eevee game.</p>
+                    </div>
+                    <a class="button button-primary" href="https://spencersmith810.github.io/assignment-portfolio/" target="_blank" rel="noopener">Explore the collection <span aria-hidden="true">↗</span></a>
+                </article>
+            </section>
         </main>
 
-        <footer id="contact"><div class="footer-heading"><p class="eyebrow">Have a question?</p><h2>Let’s make<br><em>something memorable.</em></h2><p>I’m always interested in thoughtful feedback, new ideas, and opportunities to keep learning.</p></div><section class="contact-section" aria-labelledby="contact-title"><h2 id="contact-title">Send a message</h2><form id="contact-form" class="contact-form" action="https://formspree.io/f/mzeezbrn" method="POST"><input type="hidden" name="_next" value="https://spencersmith810.github.io/wdd130/"><label for="full-name">Full name</label><input type="text" id="full-name" name="full_name" autocomplete="name" required><label for="email">Email address</label><input type="email" id="email" name="email" autocomplete="email" required><label for="message">Message</label><textarea id="message" name="message" rows="4" required></textarea><button class="button button-light" type="submit">Send my message <span aria-hidden="true">↗</span></button><p id="form-status" role="status" aria-live="polite"></p></form></section><div class="footer-bottom"><span>© 2026 Spencer Smith</span><span>Built with curiosity · WDD 130</span></div></footer>
+        <footer id="contact">
+            <div class="footer-heading">
+                <p class="eyebrow">Have a question?</p>
+                <h2>
+                    Let’s make<br>
+                    <em>something memorable.</em>
+                </h2>
+                <p>
+                    I’m always interested in thoughtful feedback, new ideas, and opportunities to keep learning.
+                </p>
+            </div>
+
+            <section class="contact-section" aria-labelledby="contact-title">
+                <h2 id="contact-title">Send a message</h2>
+
+                <form
+                    id="contact-form"
+                    class="contact-form"
+                    action="https://formspree.io/f/mzeezbrn"
+                    method="POST"
+                >
+                    <input type="hidden" name="_next" value="https://spencersmith810.github.io/wdd130/">
+
+                    <label for="full-name">Full name</label>
+                    <input type="text" id="full-name" name="full_name" autocomplete="name" required>
+
+                    <label for="email">Email address</label>
+                    <input type="email" id="email" name="email" autocomplete="email" required>
+
+                    <label for="message">Message</label>
+                    <textarea id="message" name="message" rows="4" required></textarea>
+
+                    <button class="button button-light" type="submit">
+                        Send my message <span aria-hidden="true">↗</span>
+                    </button>
+                    <p id="form-status" role="status" aria-live="polite"></p>
+                </form>
+            </section>
+
+            <div class="footer-bottom">
+                <span>© 2026 Spencer Smith</span>
+                <span>Built with curiosity · WDD 130</span>
+            </div>
+        </footer>
     </div>
     <script>
         const contactForm = document.querySelector("#contact-form");
